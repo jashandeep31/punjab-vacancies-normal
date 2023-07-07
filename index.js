@@ -21,7 +21,10 @@ app.use(express.json());
 app.use(function (req, res, next) {
     res.setHeader(
         "Access-Control-Allow-Origin",
-        "https://punjabvacancies.live"
+        "https://punjabvacancies.live",
+        "https://greensweep.in",
+        "https://www.greensweep.in",
+        "https://www.punjabvacancies.live"
     );
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader(
