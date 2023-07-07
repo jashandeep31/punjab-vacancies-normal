@@ -18,6 +18,14 @@ var allowedOrigins = [
 
 app.use(express.json());
 app.use(function (req, res, next) {
+    res.header(
+        "Access-Control-Allow-Origin",
+        "https://www.punjabvacancies.live"
+    ); // Update with your allowed origin(s)
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    ); // Update with your allowed headers
     res.header("Access-Control-Allow-Credentials", "true");
     // Add other necessary headers
     next();
@@ -50,7 +58,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/", (req, res, next) => {
-    res.send("0.0.1");
+    res.send("0.0.3");
 });
 app.use("/api/v1/auth", require("./routes/authRoutes")); // checked
 app.use("/api/v1/job", require("./routes/jobRoutes"));
