@@ -3,6 +3,7 @@ const port = process.env.PORT || 8000;
 const passport = require("passport");
 const cookiesSession = require("cookie-session");
 const protectedRoutes = require("./utils/protectedRoutes");
+const session = require("express-session");
 const cors = require("cors");
 require("dotenv").config("");
 require("./utils/passport");
@@ -17,19 +18,19 @@ var allowedOrigins = [
 ];
 
 app.use(express.json());
-app.use(function (req, res, next) {
-    res.header(
-        "Access-Control-Allow-Origin",
-        "https://www.punjabvacancies.live"
-    ); // Update with your allowed origin(s)
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    ); // Update with your allowed headers
-    res.header("Access-Control-Allow-Credentials", "true");
-    // Add other necessary headers
-    next();
-});
+// app.use(function (req, res, next) {
+//     res.header(
+//         "Access-Control-Allow-Origin",
+//         "https://www.punjabvacancies.live"
+//     ); // Update with your allowed origin(s)
+//     res.header(
+//         "Access-Control-Allow-Headers",
+//         "Origin, X-Requested-With, Content-Type, Accept"
+//     ); // Update with your allowed headers
+//     res.header("Access-Control-Allow-Credentials", "true");
+//     // Add other necessary headers
+//     next();
+// });
 
 app.use(
     cors({
@@ -45,15 +46,24 @@ app.use(
     })
 );
 
+// app.use(
+//     cookiesSession({
+//         name: "session",
+//         keys: ["googleAuths"],
+//         maxAge: 10 * 24 * 60 * 60 * 1000, // cookies are stored for 10 days
+//     })
+// );
 app.use(
-    cookiesSession({
-        name: "session",
-        keys: ["googleAuth"],
-        maxAge: 10 * 24 * 60 * 60 * 1000, // cookies are stored for 10 days
-        sameSite: "none", // Allow cross-site access
-        secure: true, // On
+    session({
+        secret: "secretcode",
+        resave: true,
+        saveUninitialized: true,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 7, // One Week
+        },
     })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
