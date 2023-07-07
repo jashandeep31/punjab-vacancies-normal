@@ -71,7 +71,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/", (req, res, next) => {
-    res.send("0.0.3");
+    res.send("0.0.69");
 });
 app.use("/api/v1/auth", require("./routes/authRoutes")); // checked
 app.use("/api/v1/job", require("./routes/jobRoutes"));
