@@ -9,24 +9,24 @@ require("./utils/passport");
 require("./utils/mongoose");
 const app = express();
 
-var allowedOrigins = ["http://localhost:3000", process.env.FRONTEND];
+var allowedOrigins = [
+    "https://www.punjabvacancies.live",
+    "http://www.punjabvacancies.live",
+    "https://punjabvacancies.live",
+    "http://localhost:3000",
+];
 
 app.use(express.json());
 app.use(
     cors({
         origin: function (origin, callback) {
-            // allow requests with no origin
-            // (like mobile apps or curl requests)
-            if (!origin) return callback(null, true);
-            if (allowedOrigins.indexOf(origin) === -1) {
-                var msg =
-                    "The CORS policy for this site does not " +
-                    "allow access from the specified Origin.";
-                return callback(new Error(msg), false);
+            if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
             }
-            return callback(null, true);
         },
-        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+        optionsSuccessStatus: 200,
         credentials: true,
     })
 );
@@ -36,6 +36,8 @@ app.use(
         name: "session",
         keys: ["googleAuth"],
         maxAge: 10 * 24 * 60 * 60 * 1000, // cookies are stored for 10 days
+        sameSite: "none", // Allow cross-site access
+        secure: true, // On
     })
 );
 app.use(passport.initialize());
