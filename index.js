@@ -53,6 +53,8 @@ app.use(
 //         maxAge: 10 * 24 * 60 * 60 * 1000, // cookies are stored for 10 days
 //     })
 // );
+app.set("trust proxy", 1);
+
 app.use(
     session({
         secret: "secretcode",
