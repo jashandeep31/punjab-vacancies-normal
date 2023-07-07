@@ -17,6 +17,12 @@ var allowedOrigins = [
 ];
 
 app.use(express.json());
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Credentials", "true");
+    // Add other necessary headers
+    next();
+});
+
 app.use(
     cors({
         origin: function (origin, callback) {
