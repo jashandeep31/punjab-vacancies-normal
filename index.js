@@ -18,19 +18,18 @@ var allowedOrigins = [
 ];
 
 app.use(express.json());
-// app.use(function (req, res, next) {
-//     res.header(
-//         "Access-Control-Allow-Origin",
-//         "https://www.punjabvacancies.live"
-//     ); // Update with your allowed origin(s)
-//     res.header(
-//         "Access-Control-Allow-Headers",
-//         "Origin, X-Requested-With, Content-Type, Accept"
-//     ); // Update with your allowed headers
-//     res.header("Access-Control-Allow-Credentials", "true");
-//     // Add other necessary headers
-//     next();
-// });
+app.use(function (req, res, next) {
+    res.setHeader(
+        "Access-Control-Allow-Origin",
+        "https://punjabvacancies.live"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
 
 app.use(
     cors({
