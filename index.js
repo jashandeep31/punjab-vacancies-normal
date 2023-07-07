@@ -1,8 +1,6 @@
 const express = require("express");
 const port = process.env.PORT || 8000;
 const passport = require("passport");
-const cookiesSession = require("cookie-session");
-const protectedRoutes = require("./utils/protectedRoutes");
 const session = require("express-session");
 const cors = require("cors");
 require("dotenv").config("");
@@ -18,21 +16,6 @@ var allowedOrigins = [
 ];
 
 app.use(express.json());
-app.use(function (req, res, next) {
-    res.setHeader(
-        "Access-Control-Allow-Origin",
-        "https://punjabvacancies.live",
-        "https://greensweep.in",
-        "https://www.greensweep.in",
-        "https://www.punjabvacancies.live"
-    );
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-});
 
 app.use(
     cors({
@@ -48,24 +31,15 @@ app.use(
     })
 );
 
-// app.use(
-//     cookiesSession({
-//         name: "session",
-//         keys: ["googleAuths"],
-//         maxAge: 10 * 24 * 60 * 60 * 1000, // cookies are stored for 10 days
-//     })
-// );
 app.set("trust proxy", 1);
 
 app.use(
     session({
-        secret: "secretcode",
+        secret: "xvs-ev*DjzgVfNzuYNgXth-zhRpr_KNvnecZ-c2KMgzj8i3@BZD9@y6!fee!ejvQPM37e_r-qZ8_N!QowKEzuWmrd6@8-JxPmow3",
         resave: true,
         saveUninitialized: true,
         cookie: {
             maxAge: 1000 * 60 * 60 * 24 * 7, // One Week
-            sameSite: "none",
-            secure: true,
         },
     })
 );

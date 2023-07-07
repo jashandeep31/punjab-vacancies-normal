@@ -29,8 +29,8 @@ router.get("/logout", async (req, res) => {
 router.get(
     "/google/callback",
     passport.authenticate("google", {
-        successRedirect: "http://localhost:8000/api/v1/auth/",
-        failureRedirect: "http://localhost:8000/api/v1/auth/fail",
+        successRedirect: process.env.FRONTEND,
+        failureRedirect: process.env.FRONTEND,
     })
 );
 
