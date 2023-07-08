@@ -150,18 +150,10 @@ exports.getJob = async (req, res, next) => {
 };
 
 exports.getUserSpecific = catchAsync(async (req, res, next) => {
-    const user = await User.findOne({});
-    if (!user) {
-        return next(new AppError("Something went wrong", 500));
-    }
-    const withoutFilter = new Filters(
-        Job.find({
-            createdBy: user._id,
-        }).populate("district"),
-        req.query
-    ).createdAt();
-
-    const jobs = await withoutFilter.query;
+    const user = await User.findById(req.userData.id);
+    const jobs = await Job.find({
+        createdBy: user._id,
+    }).sort({ createdAt: -1 });
 
     return res.status(200).json({
         jobs,
