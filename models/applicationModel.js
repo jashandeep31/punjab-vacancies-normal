@@ -36,8 +36,8 @@ const applicationSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["shortlisted", "archived", "normal"],
-        default: "normal",
+        enum: ["shortlisted", "archived", "new"],
+        default: "new",
     },
     filledBy: {
         type: mongoose.Schema.Types.ObjectId,

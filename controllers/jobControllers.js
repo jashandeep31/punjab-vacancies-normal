@@ -151,7 +151,6 @@ exports.getUserSpecific = catchAsync(async (req, res, next) => {
     if (!user) {
         return next(new AppError("Something went wrong", 500));
     }
-    console.log(await Job.find({ createdBy: user._id }));
     const withoutFilter = new Filters(
         Job.find({
             createdBy: user._id,

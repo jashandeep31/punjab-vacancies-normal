@@ -52,6 +52,7 @@ app.use("/api/v1/auth", require("./routes/authRoutes")); // checked
 app.use("/api/v1/job", require("./routes/jobRoutes"));
 app.use("/api/v1/other", require("./routes/otherRoutes"));
 app.use("/api/v1/application", require("./routes/applicationRoutes"));
+app.use("/api/v1/user", require("./routes/userRoutes"));
 
 app.use(require("./controllers/errorContollers"));
 app.listen(port, () => {

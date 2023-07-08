@@ -32,6 +32,14 @@ const userSchema = new mongoose.Schema({
             ref: "Job",
         },
     ],
+    requested: {
+        type: Boolean,
+        default: false,
+    },
+    phoneNumber: {
+        type: String,
+        required: true,
+    },
 });
 
 const User = mongoose.model("User", userSchema);
