@@ -22,6 +22,7 @@ exports.createJob = catchAsync(async (req, res, next) => {
         education,
         applyNowLink,
         district,
+        inbuiltForm,
     } = req.body;
 
     if (
@@ -35,7 +36,8 @@ exports.createJob = catchAsync(async (req, res, next) => {
         !interviewDetails ||
         !deadline ||
         !district ||
-        !education
+        !education ||
+        !inbuiltForm
     ) {
         //     send the error
     }
@@ -82,6 +84,7 @@ exports.createJob = catchAsync(async (req, res, next) => {
         createdBy: req.userData.id,
         applyNowLink,
         district: districtId._id,
+        inbuiltForm,
     });
 
     await axios.get(
@@ -98,7 +101,7 @@ Salary: ${job.salary}
 Location: ${districtId.name}
 
 Know More:
-<a href="https://www.google.com/s">Click here</a>
+<a href="https://www.punjabvacancies.live/job/${job.slug}">Click here</a>
 `,
                 parse_mode: "HTML",
             },
