@@ -62,6 +62,10 @@ const jobSchema = new mongoose.Schema({
         ref: "District",
         required: true,
     },
+    inbuiltForm: {
+        type: Boolean,
+        default: false,
+    },
     active: {
         type: Boolean,
         default: true,

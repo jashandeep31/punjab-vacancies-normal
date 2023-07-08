@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
     }
     const user = await User.findOne({
         userId: req.user.id,
-    }).select("name role ");
+    }).select("name role applications");
     if (!user) {
         return next(new AppError("Not authenticated", 401));
     }

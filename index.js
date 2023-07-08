@@ -31,15 +31,13 @@ app.use(
     })
 );
 
-app.set("trust proxy", 1);
-
 app.use(
     session({
         secret: "xvs-ev*DjzgVfNzuYNgXth-zhRpr_KNvnecZ-c2KMgzj8i3@BZD9@y6!fee!ejvQPM37e_r-qZ8_N!QowKEzuWmrd6@8-JxPmow3",
         resave: true,
         saveUninitialized: true,
         cookie: {
-            maxAge: 1000 * 60 * 60 * 24 * 7, // One Week
+            maxAge: 1000 * 60 * 60 * 24 * 20, // One Week
         },
     })
 );
@@ -47,12 +45,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", (req, res, next) => {
+app.get("/", async (req, res, next) => {
     res.send("0.0.88");
 });
 app.use("/api/v1/auth", require("./routes/authRoutes")); // checked
 app.use("/api/v1/job", require("./routes/jobRoutes"));
 app.use("/api/v1/other", require("./routes/otherRoutes"));
+app.use("/api/v1/application", require("./routes/applicationRoutes"));
 
 app.use(require("./controllers/errorContollers"));
 app.listen(port, () => {

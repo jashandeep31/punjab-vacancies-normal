@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Job = require("./jobModel");
 const userSchema = new mongoose.Schema({
     userId: {
         type: String,
@@ -25,6 +26,12 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    applications: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Job",
+        },
+    ],
 });
 
 const User = mongoose.model("User", userSchema);

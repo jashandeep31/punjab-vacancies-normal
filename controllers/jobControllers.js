@@ -1,4 +1,5 @@
 const Job = require("../models/jobModel");
+const User = require("../models/userModel");
 const slugify = require("slugify");
 const axios = require("axios");
 const moment = require("moment");
@@ -78,7 +79,7 @@ exports.createJob = catchAsync(async (req, res, next) => {
         deadline: new Date(deadline),
         slug,
         education,
-        user: req.userData.id,
+        createdBy: req.userData.id,
         applyNowLink,
         district: districtId._id,
     });
@@ -117,8 +118,7 @@ exports.getAll = async (req, res, next) => {
         Job.find({
             active: true,
         }).populate("district"),
-        req.query,
-        helper
+        req.query
     )
         .createdAt()
         .paginate();
@@ -147,7 +147,20 @@ exports.getJob = async (req, res, next) => {
 };
 
 exports.getUserSpecific = catchAsync(async (req, res, next) => {
-    const jobs = await Job.find({});
+    const user = await User.findOne({});
+    if (!user) {
+        return next(new AppError("Something went wrong", 500));
+    }
+    console.log(await Job.find({ createdBy: user._id }));
+    const withoutFilter = new Filters(
+        Job.find({
+            createdBy: user._id,
+        }).populate("district"),
+        req.query
+    ).createdAt();
+
+    const jobs = await withoutFilter.query;
+
     return res.status(200).json({
         jobs,
     });
