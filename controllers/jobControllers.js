@@ -39,7 +39,7 @@ exports.createJob = catchAsync(async (req, res, next) => {
         !education ||
         !inbuiltForm
     ) {
-        //     send the error
+        return next(new AppError("Please fill all the fields", 400));
     }
     const districtId = await District.findOne({
         slug: district,
