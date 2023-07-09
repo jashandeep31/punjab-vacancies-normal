@@ -113,16 +113,32 @@ Know More:
     });
 });
 
-exports.getAll = async (req, res, next) => {
+exports.getAll = catchAsync(async (req, res, next) => {
     let helper = {
         total: 0,
     };
-    const withoutFilter = new Filters(
-        Job.find({
-            active: true,
-        }).populate("district"),
-        req.query
-    )
+    const aggregateStages = [
+        {
+            $lookup: {
+                from: "districts",
+                localField: "district",
+                foreignField: "_id",
+                as: "district",
+            },
+        },
+        {
+            $unwind: "$district",
+        },
+    ];
+    if (req.query.district) {
+        aggregateStages.push({
+            $match: {
+                "district.slug": req.query.district,
+            },
+        });
+    }
+
+    const withoutFilter = new Filters(Job.aggregate(aggregateStages), req.query)
         .createdAt()
         .paginate();
 
@@ -135,7 +151,7 @@ exports.getAll = async (req, res, next) => {
             total: testData,
         },
     });
-};
+});
 
 exports.getJob = async (req, res, next) => {
     const job = await Job.findOne({
