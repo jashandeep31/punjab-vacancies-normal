@@ -36,8 +36,7 @@ exports.createJob = catchAsync(async (req, res, next) => {
         !interviewDetails ||
         !deadline ||
         !district ||
-        !education ||
-        !inbuiltForm
+        !education
     ) {
         return next(new AppError("Please fill all the fields", 400));
     }
