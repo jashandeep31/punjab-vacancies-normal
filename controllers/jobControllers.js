@@ -175,7 +175,7 @@ exports.getAll = catchAsync(async (req, res, next) => {
                         },
                     },
                 ],
-                data: [{ $skip: (page - 1) * 10 }, { $limit: 10 }],
+                data: [{ $skip: (page - 1) * limit }, { $limit: limit }],
             },
         }
     );
