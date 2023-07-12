@@ -113,9 +113,17 @@ Know More:
 });
 
 exports.getAll = catchAsync(async (req, res, next) => {
-    let helper = {
-        total: 0,
-    };
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 10;
+    let district = "all";
+    if (req.query.district) {
+        district = await District.findOne({
+            slug: req.query.district,
+        });
+        if (!district) {
+            return next(new AppError("Sorry! This page doesn't exist", 404));
+        }
+    }
     const aggregateStages = [
         {
             $lookup: {
@@ -125,9 +133,6 @@ exports.getAll = catchAsync(async (req, res, next) => {
                 as: "district",
             },
         },
-        {
-            $unwind: "$district",
-        },
     ];
     if (req.query.district) {
         aggregateStages.push({
@@ -136,18 +141,60 @@ exports.getAll = catchAsync(async (req, res, next) => {
             },
         });
     }
+    aggregateStages.push(
+        {
+            $sort: {
+                createdAt: -1,
+            },
+        },
+        {
+            $unwind: "$district",
+        },
+        {
+            $facet: {
+                metadata: [
+                    { $count: "total" },
+                    {
+                        $addFields: {
+                            page: page,
+                            isNext: {
+                                $cond: {
+                                    if: { $gt: ["$total", limit * page] },
+                                    then: true,
+                                    else: false,
+                                },
+                            },
+                            isPrev: {
+                                $cond: {
+                                    if: { $gt: [page, 1] },
+                                    then: true,
+                                    else: false,
+                                },
+                            },
+                            district: district,
+                        },
+                    },
+                ],
+                data: [{ $skip: (page - 1) * 10 }, { $limit: 10 }],
+            },
+        }
+    );
 
-    const withoutFilter = new Filters(Job.aggregate(aggregateStages), req.query)
-        .createdAt()
-        .paginate();
-
-    const jobs = await withoutFilter.query;
-    const testData = await Job.count();
-
+    const jobs = await Job.aggregate(aggregateStages);
+    if (jobs[0].metadata.length === 0) {
+        jobs[0].metadata = [
+            {
+                total: 0,
+                page: 1,
+                isNext: false,
+                isPrev: false,
+                district: district,
+            },
+        ];
+    }
     res.status(200).json({
         data: {
-            jobs,
-            total: testData,
+            jobs: jobs[0],
         },
     });
 });
