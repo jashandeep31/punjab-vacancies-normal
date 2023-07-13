@@ -108,7 +108,10 @@ Know More:
         }
     );
 
-    indexingFunction(`https://punjabvacancies.live/job/${job.slug}`);
+    indexingFunction(
+        `https://punjabvacancies.live/job/${job.slug}`,
+        "URL_UPDATED"
+    );
 
     res.status(201).json({
         job,
