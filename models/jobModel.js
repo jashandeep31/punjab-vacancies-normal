@@ -125,7 +125,7 @@ const jobSchema = new mongoose.Schema({
                 type: String,
             },
             minValue: {
-                type: String,
+                type: Number,
             },
             maxValue: {
                 type: Number,
