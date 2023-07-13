@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "punjab-vacancies",
+    "private_key_id": "f03be52f23976694b5bfa82cc296adb3cb16e693",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+f2JSKoAQIeYb\ncllNc+D4a7Q/E5EnjYPlivw0ZpM216kP2gh454bGUd4qMp7w8JdU6b3WZhfQCom1\nOshv5C+cAfgVG/Knh1OHTWghr11hTr3sfsEiecaJBwIht4qYDMLHGJq7y19yoChK\nK4Za2WMKKeoWGQGdStfRrX7P3YU/dzENrtaeJ5z4Py16F6qgWfs08arPXHjOn39j\nQZS1j86zLRbELo0YjQSwe2mgiUnwvpXMQD/vzQEuo8I5ptstWYBKkRnO8esYAPRL\nkmGEXjFtydxl0Q3dipQHGjIlmG83ECgzLB5cP5gmgUFJC5LLHvvSyJD5ETXNdkKE\n5dspber5AgMBAAECggEADGy9inNoL+UuH3spVPJqaXmI45ZQoN5LjISwp3BLSMfv\nKHAFnnEnarb7QRBVKozeqfSm4518Dx8o1S+01AtziX7dYe8VOBUM/yWu1YedFRQw\nMgUgbrG3n8dbvbw9Z2Zpq9ewe/ArVQwaJKBLHpDQM2EBehh+cPZpNi1VOJSPtNBh\nwm68x6eMRN4BDZBfGcaHlaItqvebjiBHMLlG4J4RAFoettBx7qjWgJDFLB/xCm3B\nH6rYL6uf0VE6m+9yPNeEgHd67CB9DW5suL+68/LuMsjFOZN7iVMOeEIHE8rVHJWm\n76ubAq1wk8jCpCkkqZUqjIlLdAbgQZMatwq9meRUWwKBgQD+rqtoDVGqvdBvU+hY\n7jse9IHf8T3TGhmCWr3mX/yfzMnw14dWfh6RBjMgQe5RTB3GUs0U5ey4yx9XcAtv\ne0IpPaRej8vXY+P+OaFmZBSw++iQHANtnouSCaDZj8OGntvVHQLZfgNY3kfSCU8y\ntVa3SIxSwahZ10B06Vc1chKL0wKBgQC/e7NvnszoSqV8r21qTUIGMeXJqUAQiPaf\nZSLkgtrsovGfYqgvzKm7t/saobSQeNxeMnO+76fWTTxBCMms5g95TvwKPDgu1qvK\nMLKfks3KPxhdyQ6hPu5AOhziu4IGyLq/G+DSOLtwOpRDJQmsjRfxjNmTJrXkDMRi\nTk09I+lqgwKBgQDZptzFp9xLVrxy5/qBRdcwtTTo9Xoolv2F8Zao8w8qYhGSyh7X\nRCFLP0kiIDZTNAGeI9UwLu8HXlACobakJ2p7ZDq8tZc3FB8cfJP6tT0Zo680uTwU\nypHs1F2qkLpAqjKlBo4Q4ShrIkuurFYKt/7L1CxX7Ti6zsI/J8tn2X0QEQKBgDvv\nGxXn7ZkTrEKfoi6wqebIfXUmba//PrpbbJV7w8xnoBtURPJZLBNendETJjJGMiul\nvQbZen4gRKjSeFWO2O8OYuNNQAShGro5jd9WkuUn5JeOU+7yhJ5D0kDBkgxPjew9\nbJxAN6MEIt31XNbOft0TShK9/ha4TEu82H43nFrDAoGATUy24AhLLncWkVoJzqYT\nrPrzMYrWvQj7Z8nXdm2bI5OK7or3QlYrBRDKTdt6Z/a+mJ0pXki9KxOyXECmpGrM\n+X4zJNn8jWnsBm3EtUpWjmpoRFxFKU+50b7UDq9YxZuZwp+zFrCm2wvBTPhbpZav\nOgqsnQFyyWviiRHWTw8XiDg=\n-----END PRIVATE KEY-----\n",
+    "client_email": "indexing@punjab-vacancies.iam.gserviceaccount.com",
+    "client_id": "114541191945285988062",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/indexing%40punjab-vacancies.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+}

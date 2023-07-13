@@ -7,6 +7,7 @@ const Filters = require("../utils/Filters");
 const { District } = require("../models/otherModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
+const indexingFunction = require("../utils/indexingFunction");
 
 exports.createJob = catchAsync(async (req, res, next) => {
     let {
@@ -106,6 +107,8 @@ Know More:
             },
         }
     );
+
+    indexingFunction(`https://punjabvacancies.live/job/${job.slug}`);
 
     res.status(201).json({
         job,
