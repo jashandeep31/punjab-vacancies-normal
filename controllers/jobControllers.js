@@ -24,23 +24,81 @@ exports.createJob = catchAsync(async (req, res, next) => {
         applyNowLink,
         district,
         inbuiltForm,
+        activeGoogleCard,
+        streetAddress,
+        addressLocality,
+        addressRegion,
+        postalCode,
+        addressCountry,
+        minValue,
+        maxValue,
+        unitText,
+        isBoth,
+        value,
+        OrgName,
+        logo,
+        website,
     } = req.body;
 
-    if (
-        !title ||
-        !organization ||
-        !salary ||
-        !jobSector ||
-        !jobType ||
-        !experience ||
-        !description ||
-        !interviewDetails ||
-        !deadline ||
-        !district ||
-        !education
-    ) {
-        return next(new AppError("Please fill all the fields", 400));
+    // if (
+    //     !title ||
+    //     !organization ||
+    //     !salary ||
+    //     !jobSector ||
+    //     !jobType ||
+    //     !experience ||
+    //     !description ||
+    //     !interviewDetails ||
+    //     !deadline ||
+    //     !district ||
+    //     !education
+    // ) {
+    //     return next(new AppError("Please fill all the fields", 400));
+    // }
+    if (!title) {
+        return next(new AppError("Please provide a title", 400));
     }
+
+    if (!organization) {
+        return next(new AppError("Please provide an organization", 400));
+    }
+
+    if (!salary) {
+        return next(new AppError("Please provide a salary", 400));
+    }
+
+    if (!jobSector) {
+        return next(new AppError("Please provide a job sector", 400));
+    }
+
+    if (!jobType) {
+        return next(new AppError("Please provide a job type", 400));
+    }
+
+    if (!experience) {
+        return next(new AppError("Please provide experience details", 400));
+    }
+
+    if (!description) {
+        return next(new AppError("Please provide a description", 400));
+    }
+
+    if (!interviewDetails) {
+        return next(new AppError("Please provide interview details", 400));
+    }
+
+    if (!deadline) {
+        return next(new AppError("Please provide a deadline", 400));
+    }
+
+    if (!district) {
+        return next(new AppError("Please provide a district", 400));
+    }
+
+    if (!education) {
+        return next(new AppError("Please provide education details", 400));
+    }
+
     const districtId = await District.findOne({
         slug: district,
     });
@@ -68,7 +126,14 @@ exports.createJob = catchAsync(async (req, res, next) => {
         }
         slug = slug + generateRandom();
     }
-
+    let active = false;
+    if (req.userData.role === "admin") {
+        active = true;
+        activeGoogleCard = req.body.activeGoogleCard;
+    } else {
+        active = false;
+        activeGoogleCard = false;
+    }
     const job = await Job.create({
         title,
         organization,
@@ -85,6 +150,36 @@ exports.createJob = catchAsync(async (req, res, next) => {
         applyNowLink,
         district: districtId._id,
         inbuiltForm,
+        active: active,
+        activeGoogleCard,
+        gorganization: {
+            typeOf: "Organization",
+            name: OrgName,
+            logo,
+            website,
+        },
+        jobLocation: {
+            type: "Place",
+            address: {
+                type: "PostalAddress",
+                streetAddress,
+                addressLocality,
+                addressRegion,
+                postalCode,
+                addressCountry,
+            },
+        },
+        baseSalary: {
+            type: "MonetaryAmount",
+            value: {
+                typeof: "QuantitativeValueDistribution",
+                minValue,
+                maxValue,
+                unitText,
+                isBoth,
+                value,
+            },
+        },
     });
 
     await axios.get(

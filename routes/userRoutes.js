@@ -12,6 +12,7 @@ router
         const user = await User.findByIdAndUpdate(req.userData._id, {
             requested: true,
             phoneNumber,
+            role: "manager",
         });
         return res.status(200).json({});
     });
