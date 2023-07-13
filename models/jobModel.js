@@ -73,6 +73,76 @@ const jobSchema = new mongoose.Schema({
     applyNowLink: {
         type: String,
     },
+    activeGoogleCard: {
+        type: Boolean,
+        default: false,
+    },
+    gorganization: {
+        typeOf: {
+            type: String,
+        },
+        name: {
+            type: String,
+        },
+        logo: {
+            type: String,
+        },
+        website: {
+            type: String,
+        },
+    },
+    jobLocation: {
+        typeOf: {
+            type: String,
+        },
+        address: {
+            typeOf: {
+                type: String,
+            },
+            streetAddress: {
+                type: String,
+            },
+            addressLocality: {
+                type: String,
+            },
+            addressRegion: {
+                type: String,
+            },
+            postalCode: {
+                type: String,
+            },
+            addressCountry: {
+                type: String,
+            },
+        },
+    },
+    baseSalary: {
+        typeOf: {
+            type: String,
+        },
+        value: {
+            typeof: {
+                type: String,
+            },
+            minValue: {
+                type: Number,
+            },
+            maxValue: {
+                type: Number,
+            },
+            unitText: {
+                type: String,
+            },
+            isBoth: {
+                type: Boolean,
+
+                default: false,
+            },
+            value: {
+                type: Number,
+            },
+        },
+    },
 });
 
 const Job = mongoose.model("Job", jobSchema);

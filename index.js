@@ -1,10 +1,10 @@
 const express = require("express");
-const port = process.env.PORT || 8000;
 const passport = require("passport");
 const session = require("express-session");
 const cors = require("cors");
 
 require("dotenv").config("");
+const port = process.env.PORT || 8000;
 require("./utils/passport");
 require("./utils/mongoose");
 const app = express();
