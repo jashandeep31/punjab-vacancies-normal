@@ -1,3 +1,4 @@
+const { directJob } = require("../controllers/directJobController");
 const {
     createJob,
     getAll,
@@ -8,6 +9,7 @@ const protectedRoutes = require("../utils/protectedRoutes");
 const router = require("express").Router();
 
 router.route("/create").post(protectedRoutes(["manager", "admin"]), createJob);
+router.route("/direct").post(directJob);
 router.route("/all").get(getAll);
 router
     .route("/manager-jobs")
