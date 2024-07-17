@@ -10,9 +10,8 @@ require("./utils/mongoose");
 const app = express();
 
 var allowedOrigins = [
-    "https://www.punjabvacancies.live",
-    "http://www.punjabvacancies.live",
-    "https://punjabvacancies.live",
+    "http://ajobs.jashandeep.me/",
+    "http://www.ajobs.jashandeep.me/",
     "http://localhost:3000",
 ];
 
