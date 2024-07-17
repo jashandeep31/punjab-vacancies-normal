@@ -10,8 +10,8 @@ require("./utils/mongoose");
 const app = express();
 
 var allowedOrigins = [
-    "http://jobs.jashandeep.me",
-    "http://www.jobs.jashandeep.me",
+    "https://jobs.jashandeep.me",
+    "https://www.jobs.jashandeep.me",
     "http://localhost:3000",
 ];
 
