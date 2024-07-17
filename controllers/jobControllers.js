@@ -196,7 +196,7 @@ Salary: ${job.salary}
 Location: ${districtId.name}
 
 Know More:
-<a href="https://www.punjabvacancies.live/job/${job.slug}">Click here</a>
+<a href="https://www.jobs.jashandeep.me/job/${job.slug}">Click here</a>
 `,
                 parse_mode: "HTML",
             },
@@ -204,7 +204,7 @@ Know More:
     );
 
     indexingFunction(
-        `https://punjabvacancies.live/job/${job.slug}`,
+        `https://jobs.jashandeep.me/job/${job.slug}`,
         "URL_UPDATED"
     );
 
